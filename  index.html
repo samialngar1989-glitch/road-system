@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛣️ نظام شركة هندسة الطرقات</title>
+<meta name="theme-color" content="#2563eb">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="app">
+  <header class="header">
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <div class="header-logo"><i class="fas fa-road"></i><span>نظام الطرقات</span></div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="anomalyBtn" title="فحص الأخطاء"><i class="fas fa-shield-alt"></i></button>
+      <button class="icon-btn" id="themeBtn" title="الوضع الليلي"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn" id="refreshBtn" title="تحديث"><i class="fas fa-sync-alt"></i></button>
+      <button class="icon-btn" id="printCurrentBtn" title="طباعة الصفحة"><i class="fas fa-print"></i></button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-title">📋 التسجيل اليومي</div>
+      <div class="nav-item" data-page="daily-equip"><i class="fas fa-truck-monster"></i><span>سجل المعدات اليومي</span></div>
+      <div class="nav-item" data-page="daily-workers"><i class="fas fa-user-clock"></i><span>سجل العمال اليومي</span></div>
+      <div class="nav-item" data-page="attendance"><i class="fas fa-calendar-check"></i><span>الحضور الجماعي</span></div>
+      <div class="nav-item" data-page="material-supply"><i class="fas fa-truck-loading"></i><span>توريد المواد</span></div>
+      <div class="nav-item" data-page="fuel"><i class="fas fa-gas-pump"></i><span>المحروقات</span></div>
+      <div class="nav-item" data-page="purchases"><i class="fas fa-shopping-cart"></i><span>المشتريات</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">الرئيسية</div>
+      <div class="nav-item active" data-page="dashboard"><i class="fas fa-chart-line"></i><span>لوحة التحكم</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">المشاريع</div>
+      <div class="nav-item" data-page="projects"><i class="fas fa-road"></i><span>المشاريع</span></div>
+      <div class="nav-item" data-page="sites"><i class="fas fa-map-marked-alt"></i><span>المواقع</span></div>
+      <div class="nav-item" data-page="boq"><i class="fas fa-list-ol"></i><span>بنود المشروع (BOQ)</span></div>
+      <div class="nav-item" data-page="progress"><i class="fas fa-tasks"></i><span>الإنجاز</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">الموارد</div>
+      <div class="nav-item" data-page="equipment"><i class="fas fa-truck-monster"></i><span>المعدات</span></div>
+      <div class="nav-item" data-page="maintenance"><i class="fas fa-tools"></i><span>الصيانة</span></div>
+      <div class="nav-item" data-page="workers"><i class="fas fa-hard-hat"></i><span>العمال</span></div>
+      <div class="nav-item" data-page="materials"><i class="fas fa-boxes"></i><span>المواد</span></div>
+      <div class="nav-item" data-page="suppliers"><i class="fas fa-handshake"></i><span>الموردين</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">المالية</div>
+      <div class="nav-item" data-page="invoices"><i class="fas fa-file-invoice-dollar"></i><span>الفواتير</span></div>
+      <div class="nav-item" data-page="expenses"><i class="fas fa-money-bill-wave"></i><span>المصروفات</span></div>
+      <div class="nav-item" data-page="consolidated-expenses"><i class="fas fa-coins"></i><span>المصروفات الموحدة</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">الجودة والسلامة</div>
+      <div class="nav-item" data-page="safety"><i class="fas fa-shield-alt"></i><span>السلامة</span></div>
+      <div class="nav-item" data-page="quality"><i class="fas fa-clipboard-check"></i><span>الجودة</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">🏗️ التخطيط الذكي</div>
+      <div class="nav-item" data-page="smart-planner"><i class="fas fa-magic"></i><span>مُخطط المشاريع</span></div>
+      <div class="nav-item" data-page="saved-plans"><i class="fas fa-save"></i><span>الخطط المحفوظة</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">📊 التقارير المتقدمة</div>
+      <div class="nav-item" data-page="advanced-dashboard"><i class="fas fa-chart-pie"></i><span>لوحة متقدمة</span></div>
+      <div class="nav-item" data-page="profit-loss"><i class="fas fa-balance-scale"></i><span>أرباح المشاريع</span></div>
+      <div class="nav-item" data-page="equipment-cost"><i class="fas fa-calculator"></i><span>تكلفة المعدات</span></div>
+      <div class="nav-item" data-page="worker-productivity"><i class="fas fa-user-chart"></i><span>إنتاجية العمال</span></div>
+      <div class="nav-item" data-page="anomalies"><i class="fas fa-exclamation-circle"></i><span>كاشف الأخطاء</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">📄 كشوف الحسابات</div>
+      <div class="nav-item" data-page="monthly-salaries"><i class="fas fa-file-invoice-dollar"></i><span>كشف الرواتب الشهري</span></div>
+      <div class="nav-item" data-page="person-statement"><i class="fas fa-user-tie"></i><span>كشف حساب شخص</span></div>
+      <div class="nav-item" data-page="equipment-statement"><i class="fas fa-truck"></i><span>كشف حساب معدة</span></div>
+      <div class="nav-item" data-page="attachments"><i class="fas fa-images"></i><span>المرفقات والصور</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">الإعدادات</div>
+      <div class="nav-item" data-page="settings"><i class="fas fa-cog"></i><span>الإعدادات</span></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <!-- لوحة التحكم -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-chart-line"></i><span>لوحة التحكم</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-road"></i></div>
+          <div class="stat-info"><h3 id="statProjects">0</h3><p>إجمالي المشاريع</p></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-info"><h3 id="statActiveProjects">0</h3><p>مشاريع نشطة</p></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-truck-monster"></i></div>
+          <div class="stat-info"><h3 id="statEquipment">0</h3><p>معدات تعمل</p></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-hard-hat"></i></div>
+          <div class="stat-info"><h3 id="statWorkers">0</h3><p>عمال يعملون</p></div></div>
+        <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-money-bill-trend-up"></i></div>
+          <div class="stat-info"><h3 id="statRevenue">0</h3><p>الإيرادات</p></div></div>
+        <div class="stat-card"><div class="stat-icon red"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="stat-info"><h3 id="statLowStock">0</h3><p>مواد منخفضة</p></div></div>
+        <div class="stat-card"><div class="stat-icon gold"><i class="fas fa-chart-line"></i></div>
+          <div class="stat-info"><h3 id="statProfit">0</h3><p>الأرباح</p></div></div>
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-shield-alt"></i></div>
+          <div class="stat-info"><h3 id="statSafety">0</h3><p>تقارير السلامة</p></div></div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="card-header"><h3 class="card-title"><i class="fas fa-chart-line"></i><span>الإيرادات الشهرية</span></h3></div>
+          <div class="card-body"><canvas id="chartMonthly" height="200"></canvas></div></div>
+        <div class="card"><div class="card-header"><h3 class="card-title"><i class="fas fa-chart-pie"></i><span>حالات المشاريع</span></h3></div>
+          <div class="card-body"><canvas id="chartProjects" height="200"></canvas></div></div>
+        <div class="card"><div class="card-header"><h3 class="card-title"><i class="fas fa-boxes"></i><span>مخزون المواد</span></h3></div>
+          <div class="card-body"><canvas id="chartMaterials" height="200"></canvas></div></div>
+        <div class="card"><div class="card-header"><h3 class="card-title"><i class="fas fa-money-bill-wave"></i><span>المصروفات حسب الفئة</span></h3></div>
+          <div class="card-body"><canvas id="chartExpenses" height="200"></canvas></div></div>
+      </div>
+    </div>
+
+    <!-- المشاريع -->
+    <div class="page" id="page-projects">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-road"></i><span>المشاريع</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openProjectModal()"><i class="fas fa-plus"></i> مشروع جديد</button>
+        </div>
+      </div>
+      <div class="grid-3" id="projectsGrid"></div>
+    </div>
+
+    <!-- المواقع -->
+    <div class="page" id="page-sites">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-map-marked-alt"></i><span>المواقع</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openSiteModal()"><i class="fas fa-plus"></i> موقع جديد</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>الاسم</th><th>المشروع</th><th>من كم</th><th>إلى كم</th><th>الطول</th><th>الحالة</th><th>المشرف</th><th>إجراءات</th></tr></thead>
+          <tbody id="sitesTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- BOQ -->
+    <div class="page" id="page-boq">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-list-ol"></i><span>بنود المشروع (BOQ)</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-warning btn-auto" onclick="recalcBOQ()"><i class="fas fa-sync-alt"></i> إعادة حساب</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openBOQModal()"><i class="fas fa-plus"></i> بند جديد</button>
+        </div>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">المشروع</label>
+          <select class="form-select" id="boqProjectFilter" onchange="loadBOQ()" style="min-width:250px;">
+            <option value="">كل المشاريع</option>
+          </select>
+        </div>
+      </div>
+      <div id="boqSummaryBox"></div>
+      <div class="card">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead><tr>
+              <th>#</th><th>الكود</th><th>البند</th><th>الوحدة</th>
+              <th>الكمية التعاقدية</th><th>سعر الوحدة</th><th>الإجمالي</th>
+              <th>المنفذ</th><th>المتبقي</th>
+              <th style="min-width:150px;">نسبة الإنجاز</th>
+              <th>الحالة</th><th>إجراءات</th>
+            </tr></thead>
+            <tbody id="boqTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- المعدات -->
+    <div class="page" id="page-equipment">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-truck-monster"></i><span>المعدات</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openEquipmentModal()"><i class="fas fa-plus"></i> معدة جديدة</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>الاسم</th><th>النوع</th><th>الموديل</th><th>اللوحة</th><th>المالك</th><th>الحالة</th><th>المشغل</th><th>إجراءات</th></tr></thead>
+          <tbody id="equipmentTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- الصيانة -->
+    <div class="page" id="page-maintenance">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-tools"></i><span>الصيانة</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openMaintenanceModal()"><i class="fas fa-plus"></i> تسجيل صيانة</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>المعدة</th><th>التاريخ</th><th>النوع</th><th>الوصف</th><th>التكلفة</th><th>الصيانة القادمة</th><th>الحالة</th><th>📷</th><th>إجراءات</th></tr></thead>
+          <tbody id="maintenanceTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- العمال -->
+    <div class="page" id="page-workers">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-hard-hat"></i><span>العمال</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openWorkerModal()"><i class="fas fa-plus"></i> عامل جديد</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>الاسم</th><th>الوظيفة</th><th>الجوال</th><th>مصاريف يومية</th><th>الراتب الشهري</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+          <tbody id="workersTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- المواد -->
+    <div class="page" id="page-materials">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-boxes"></i><span>المواد</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openMaterialModal()"><i class="fas fa-plus"></i> مادة جديدة</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>الاسم</th><th>الوحدة</th><th>السعر</th><th>المخزون</th><th>الحد الأدنى</th><th>المورد</th><th>إجراءات</th></tr></thead>
+          <tbody id="materialsTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- الموردين -->
+    <div class="page" id="page-suppliers">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-handshake"></i><span>الموردون</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openSupplierModal()"><i class="fas fa-plus"></i> مورد جديد</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>الاسم</th><th>النوع</th><th>الهاتف</th><th>إجمالي التوريدات</th><th>إجمالي المشتريات</th><th>الرصيد الحالي</th><th>إجراءات</th></tr></thead>
+          <tbody id="suppliersTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- الفواتير -->
+    <div class="page" id="page-invoices">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-file-invoice-dollar"></i><span>الفواتير</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openInvoiceModal()"><i class="fas fa-plus"></i> فاتورة جديدة</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>التاريخ</th><th>النوع</th><th>الجهة</th><th>المبلغ</th><th>المدفوع</th><th>المتبقي</th><th>الحالة</th><th>📷</th><th>إجراءات</th></tr></thead>
+          <tbody id="invoicesTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- المصروفات -->
+    <div class="page" id="page-expenses">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-money-bill-wave"></i><span>المصروفات</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openExpenseModal()"><i class="fas fa-plus"></i> مصروف جديد</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>التاريخ</th><th>الفئة</th><th>الوصف</th><th>المبلغ</th><th>دفع بواسطة</th><th>📷</th><th>إجراءات</th></tr></thead>
+          <tbody id="expensesTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- السلامة -->
+    <div class="page" id="page-safety">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-shield-alt"></i><span>السلامة</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openSafetyModal()"><i class="fas fa-plus"></i> تقرير سلامة</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>التاريخ</th><th>النوع</th><th>الوصف</th><th>الخطورة</th><th>المسؤول</th><th>إجراءات</th></tr></thead>
+          <tbody id="safetyTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- الجودة -->
+    <div class="page" id="page-quality">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-clipboard-check"></i><span>الجودة</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openQualityModal()"><i class="fas fa-plus"></i> فحص جودة</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>التاريخ</th><th>نوع الفحص</th><th>المشروع</th><th>النتيجة</th><th>الحالة</th><th>المهندس</th></tr></thead>
+          <tbody id="qualityTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- الإنجاز -->
+    <div class="page" id="page-progress">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-tasks"></i><span>تقارير الإنجاز</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openProgressModal()"><i class="fas fa-plus"></i> تقرير إنجاز</button>
+        </div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>التاريخ</th><th>المشروع</th><th>الموقع</th><th>البند</th><th>الطبقة</th><th>الكمية</th><th>المشرف</th></tr></thead>
+          <tbody id="progressTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- سجل المعدات اليومي -->
+    <div class="page" id="page-daily-equip">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-truck-monster"></i> سجل المعدات اليومي</h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openDailyEquipModal()"><i class="fas fa-plus"></i> تسجيل جديد</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <input type="date" class="form-input" id="filterEquipDate" onchange="loadDailyEquipLog()">
+        <select class="form-select" id="filterEquipProject" onchange="loadDailyEquipLog()"><option value="">كل المشاريع</option></select>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr>
+            <th>#</th><th>التاريخ</th><th>المعدة</th><th>الموقع</th>
+            <th>صباحية</th><th>مسائية</th><th>ساعات</th>
+            <th>ديزل (ل)</th><th>التكلفة</th><th>م³ منجز</th>
+            <th>📷</th><th>إجراءات</th>
+          </tr></thead>
+          <tbody id="dailyEquipTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- سجل العمال اليومي -->
+    <div class="page" id="page-daily-workers">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-user-clock"></i> سجل العمال اليومي</h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openDailyWorkerModal()"><i class="fas fa-plus"></i> تسجيل جديد</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <input type="date" class="form-input" id="filterWorkerDate" onchange="loadDailyWorkersLog()">
+        <select class="form-select" id="filterWorkerProject" onchange="loadDailyWorkersLog()"><option value="">كل المشاريع</option></select>
+        <select class="form-select" id="filterPaymentStatus" onchange="loadDailyWorkersLog()">
+          <option value="">كل الحالات</option>
+          <option value="استلم">✅ استلم</option>
+          <option value="لم يستلم">⏳ لم يستلم</option>
+        </select>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr>
+            <th>#</th><th>التاريخ</th><th>العامل</th><th>الوظيفة</th>
+            <th>الحضور</th><th>ساعات</th><th>مصاريف اليومية</th>
+            <th>إضافي</th>
+            <th>خصم</th><th>حافز</th><th>الصافي</th>
+            <th class="check-cell">استلم</th><th>📷</th><th>إجراءات</th>
+          </tr></thead>
+          <tbody id="dailyWorkersTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- الحضور الجماعي -->
+    <div class="page" id="page-attendance">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-calendar-check"></i> الحضور الجماعي</h1>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-success btn-auto" onclick="saveGroupAttendance()"><i class="fas fa-save"></i> حفظ الكل</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="showMonthlyAttendance()"><i class="fas fa-calendar-alt"></i> التقرير الشهري</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:20px;padding:15px;background:var(--bg-hover);border-radius:var(--radius);">
+        <label style="font-weight:700;">التاريخ:</label>
+        <input type="date" class="form-input" id="attendanceDate" onchange="loadGroupAttendance()" style="max-width:200px;">
+        <label style="font-weight:700;">المشروع:</label>
+        <select class="form-select" id="attendanceProject" style="max-width:250px;">
+          <option value="">بدون مشروع</option>
+        </select>
+        <span style="margin-right:auto;font-size:13px;color:var(--text-muted);">
+          <i class="fas fa-info-circle"></i> عدّل الحالات ثم اضغط "حفظ الكل"
+        </span>
+      </div>
+      <div class="card">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead><tr>
+              <th style="width:40px;">#</th>
+              <th>الاسم</th>
+              <th style="width:140px;">الحالة</th>
+              <th style="width:200px;">ملاحظات</th>
+            </tr></thead>
+            <tbody id="groupAttendanceBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- توريد المواد -->
+    <div class="page" id="page-material-supply">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-truck-loading"></i> توريد المواد</h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openMaterialSupplyModal()"><i class="fas fa-plus"></i> توريد جديد</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <input type="date" class="form-input" id="filterSupplyDate" onchange="loadMaterialSupply()">
+        <select class="form-select" id="filterSupplyProject" onchange="loadMaterialSupply()"><option value="">كل المشاريع</option></select>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr>
+            <th>#</th><th>التاريخ</th><th>المادة</th><th>من موقع</th>
+            <th>عدد الزفات</th><th>حجم الزفة</th><th>الكمية</th><th>الوحدة</th>
+            <th>السائق</th><th>التكلفة</th><th>📷</th><th>إجراءات</th>
+          </tr></thead>
+          <tbody id="materialSupplyTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- المحروقات -->
+    <div class="page" id="page-fuel">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-gas-pump"></i> المحروقات اليومية</h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openFuelModal()"><i class="fas fa-plus"></i> تسجيل جديد</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <input type="date" class="form-input" id="filterFuelDate" onchange="loadFuelLog()">
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr>
+            <th>#</th><th>التاريخ</th><th>المعدة</th><th>النوع</th><th>الكمية</th>
+            <th>سعر اللتر</th><th>الإجمالي</th><th>المصدر</th><th>📷</th><th>إجراءات</th>
+          </tr></thead>
+          <tbody id="fuelTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- المشتريات -->
+    <div class="page" id="page-purchases">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-shopping-cart"></i> المشتريات اليومية</h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-primary btn-auto" onclick="openPurchaseModal()"><i class="fas fa-plus"></i> مشترى جديد</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <input type="date" class="form-input" id="filterPurchaseDate" onchange="loadPurchases()">
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr>
+            <th>#</th><th>التاريخ</th><th>الصنف</th><th>الفئة</th><th>الكمية</th><th>السعر</th>
+            <th>الإجمالي</th><th>المورد</th><th>📷</th><th>إجراءات</th>
+          </tr></thead>
+          <tbody id="purchasesTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- المصروفات الموحدة -->
+    <div class="page" id="page-consolidated-expenses">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-coins"></i> المصروفات الموحدة</h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-warning btn-auto" onclick="rebuildExpenses()"><i class="fas fa-sync-alt"></i> إعادة تجميع</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon red"><i class="fas fa-gas-pump"></i></div>
+          <div class="stat-info"><h3 id="statFuelCost">0</h3><p>محروقات</p></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-users"></i></div>
+          <div class="stat-info"><h3 id="statWagesCost">0</h3><p>رواتب عمال</p></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-boxes"></i></div>
+          <div class="stat-info"><h3 id="statMaterialsCost">0</h3><p>مواد موردة</p></div></div>
+        <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-shopping-cart"></i></div>
+          <div class="stat-info"><h3 id="statPurchasesCost">0</h3><p>مشتريات</p></div></div>
+        <div class="stat-card"><div class="stat-icon gold"><i class="fas fa-hand-holding-usd"></i></div>
+          <div class="stat-info"><h3 id="statManualCost">0</h3><p>مصروفات يدوية</p></div></div>
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-calculator"></i></div>
+          <div class="stat-info"><h3 id="statGrandTotal">0</h3><p>الإجمالي</p></div></div>
+      </div>
+      <div class="filter-row">
+        <div class="form-group" style="margin:0;"><label class="form-label">من</label>
+          <input type="date" class="form-input" id="consoFrom" onchange="loadConsolidatedExpenses()"></div>
+        <div class="form-group" style="margin:0;"><label class="form-label">إلى</label>
+          <input type="date" class="form-input" id="consoTo" onchange="loadConsolidatedExpenses()"></div>
+        <div class="form-group" style="margin:0;"><label class="form-label">النوع</label>
+          <select class="form-select" id="consoType" onchange="loadConsolidatedExpenses()">
+            <option value="">الكل</option><option value="وقود">محروقات</option>
+            <option value="عمال">رواتب</option><option value="مواد">مواد</option>
+            <option value="مشتريات">مشتريات</option><option value="يدوي">يدوي</option>
+          </select></div>
+      </div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr><th>#</th><th>التاريخ</th><th>النوع</th><th>الوصف</th><th>الفئة</th><th>المبلغ</th><th>المشروع</th></tr></thead>
+          <tbody id="consolidatedExpensesTable"></tbody>
+        </table>
+      </div>
+      <div style="padding:15px;background:var(--bg-hover);text-align:center;font-weight:800;font-size:16px;">
+        💰 الإجمالي: <span id="consoTotal" style="color:var(--danger);">0 ر.ي</span>
+      </div></div>
+    </div>
+
+    <!-- لوحة متقدمة -->
+    <div class="page" id="page-advanced-dashboard">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-chart-pie"></i><span>لوحة متقدمة</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadAdvancedDashboard()"><i class="fas fa-sync-alt"></i> تحديث</button>
+      </div>
+      <div class="stats-grid" id="advStats"></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3 class="card-title"><i class="fas fa-balance-scale"></i><span>ملخص ربحية المشاريع</span></h3></div>
+          <div class="table-wrapper"><table class="table">
+            <thead><tr><th>المشروع</th><th>المقبوضات</th><th>المصروفات</th><th>الربح</th><th>الهامش</th><th>الإنجاز</th></tr></thead>
+            <tbody id="advProjectsSummary"></tbody>
+          </table></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3 class="card-title"><i class="fas fa-tools"></i><span>صيانة عاجلة</span></h3></div>
+          <div class="table-wrapper"><table class="table">
+            <thead><tr><th>المعدة</th><th>التاريخ</th><th>الصيانة القادمة</th><th>الحالة</th></tr></thead>
+            <tbody id="advUrgentMaint"></tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fas fa-handshake"></i><span>أعلى 5 موردين بالمستحقات</span></h3></div>
+        <div class="table-wrapper"><table class="table">
+          <thead><tr><th>المورد</th><th>النوع</th><th>التوريدات</th><th>المشتريات</th><th>المدفوع</th><th>صافي المستحق</th></tr></thead>
+          <tbody id="advTopSuppliers"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- تحليل أرباح المشاريع -->
+    <div class="page" id="page-profit-loss">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-balance-scale"></i><span>تحليل أرباح المشاريع</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">المشروع</label>
+          <select class="form-select" id="plProject" onchange="loadProjectPL()" style="min-width:280px;">
+            <option value="">اختر المشروع</option>
+          </select>
+        </div>
+      </div>
+      <div id="plContent">
+        <div class="empty-state"><i class="fas fa-chart-line"></i><h3>اختر مشروعاً لعرض التحليل</h3></div>
+      </div>
+    </div>
+
+    <!-- تكلفة المعدات -->
+    <div class="page" id="page-equipment-cost">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-calculator"></i><span>تكلفة المعدات الفعلية</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">المعدة</label>
+          <select class="form-select" id="ecEquip" style="min-width:220px;"><option value="">اختر المعدة</option></select>
+        </div>
+        <div class="form-group" style="margin:0;"><label class="form-label">من</label>
+          <input type="date" class="form-input" id="ecFrom"></div>
+        <div class="form-group" style="margin:0;"><label class="form-label">إلى</label>
+          <input type="date" class="form-input" id="ecTo"></div>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadEquipmentCost()"><i class="fas fa-search"></i> تحليل</button>
+      </div>
+      <div id="ecContent">
+        <div class="empty-state"><i class="fas fa-truck-monster"></i><h3>اختر معدة لعرض تحليل التكلفة</h3></div>
+      </div>
+    </div>
+
+    <!-- إنتاجية العمال -->
+    <div class="page" id="page-worker-productivity">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-user-chart"></i><span>إنتاجية العمال</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;"><label class="form-label">من</label>
+          <input type="date" class="form-input" id="wpFrom"></div>
+        <div class="form-group" style="margin:0;"><label class="form-label">إلى</label>
+          <input type="date" class="form-input" id="wpTo"></div>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadWorkerProductivity()"><i class="fas fa-search"></i> عرض</button>
+      </div>
+      <div class="stats-grid" id="wpStats"></div>
+      <div class="card"><div class="table-wrapper">
+        <table class="table">
+          <thead><tr>
+            <th>#</th><th>الاسم</th><th>الوظيفة</th><th>حاضر</th><th>غائب</th>
+            <th>إجازة</th><th>ساعات إضافية</th><th>نسبة الالتزام</th><th>صافي</th>
+          </tr></thead>
+          <tbody id="wpTable"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- كاشف الأخطاء -->
+    <div class="page" id="page-anomalies">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-exclamation-circle"></i><span>كاشف الأخطاء</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-warning btn-auto" onclick="loadAnomalies()"><i class="fas fa-search"></i> فحص الآن</button>
+        </div>
+      </div>
+      <div class="stats-grid" id="anomalyStats"></div>
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fas fa-list-ul"></i><span>قائمة المشاكل</span></h3></div>
+        <div class="table-wrapper"><table class="table">
+          <thead><tr><th>#</th><th>الخطورة</th><th>النوع</th><th>الوصف</th><th>المراجع</th></tr></thead>
+          <tbody id="anomaliesTable"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- كشف الرواتب الشهري -->
+    <div class="page" id="page-monthly-salaries">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-file-invoice-dollar"></i><span>كشف الرواتب الشهري</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-success btn-auto" onclick="exportSalariesPDF()"><i class="fas fa-file-pdf"></i> تصدير PDF</button>
+        </div>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">السنة</label>
+          <input type="number" class="form-input" id="salYear" style="max-width:120px;">
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">الشهر</label>
+          <select class="form-select" id="salMonth" style="max-width:150px;">
+            <option value="1">يناير</option><option value="2">فبراير</option>
+            <option value="3">مارس</option><option value="4">أبريل</option>
+            <option value="5">مايو</option><option value="6">يونيو</option>
+            <option value="7">يوليو</option><option value="8">أغسطس</option>
+            <option value="9">سبتمبر</option><option value="10">أكتوبر</option>
+            <option value="11">نوفمبر</option><option value="12">ديسمبر</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadMonthlySalaries()"><i class="fas fa-search"></i> عرض</button>
+      </div>
+      <div class="stats-grid" id="salStats"></div>
+      <div class="card">
+        <div class="table-wrapper">
+          <table class="table" id="salTableWrapper">
+            <thead><tr>
+              <th>#</th><th>الاسم</th><th>الوظيفة</th>
+              <th>أيام حضور</th><th>مصاريف يومية</th>
+              <th>الراتب المستحق</th><th>سلفة معلقة</th>
+              <th>صافي الإجمالي</th><th>المدفوع</th><th>المتبقي</th>
+              <th>الحالة</th><th>إجراءات</th>
+            </tr></thead>
+            <tbody id="salTable"></tbody>
+          </table>
+        </div>
+        <div style="padding:15px;background:var(--bg-hover);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;text-align:center;font-weight:700;font-size:13px;">
+          <div>إجمالي اليوميات: <span id="salTotalWages" style="color:var(--primary);">0</span></div>
+          <div>إجمالي الرواتب: <span id="salTotalMonthly" style="color:var(--purple);">0</span></div>
+          <div>إجمالي السلف: <span id="salTotalPending" style="color:var(--danger);">0</span></div>
+          <div>صافي الإجمالي: <span id="salTotalNet" style="color:var(--gold);">0</span></div>
+          <div>إجمالي المدفوع: <span id="salTotalPaid" style="color:var(--success);">0</span></div>
+          <div>إجمالي المتبقي: <span id="salTotalRemaining" style="color:var(--danger);">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- كشف حساب شخص -->
+    <div class="page" id="page-person-statement">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-user-tie"></i><span>كشف حساب شخص</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-success btn-auto" onclick="printPersonStatement()"><i class="fas fa-file-pdf"></i> تصدير</button>
+        </div>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;flex:1;">
+          <label class="form-label">البحث باسم العامل</label>
+          <input type="text" class="form-input" id="psSearchBox" placeholder="اكتب اسم العامل..." oninput="filterPersonList()">
+        </div>
+        <div class="form-group" style="margin:0;flex:1;">
+          <label class="form-label">اختر العامل</label>
+          <select class="form-select" id="psWorkerId" onchange="loadPersonStatement()">
+            <option value="">اختر العامل</option>
+          </select>
+        </div>
+      </div>
+      <div id="psContent">
+        <div class="empty-state"><i class="fas fa-user-tie"></i><h3>اختر عاملاً لعرض كشف حسابه</h3></div>
+      </div>
+    </div>
+
+    <!-- كشف حساب معدة -->
+    <div class="page" id="page-equipment-statement">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-truck"></i><span>كشف حساب معدة</span></h1>
+        <div style="display:flex;gap:10px;">
+          <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+          <button type="button" class="btn btn-success btn-auto" onclick="printEquipmentStatement()"><i class="fas fa-file-pdf"></i> تصدير</button>
+        </div>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;flex:1;">
+          <label class="form-label">البحث باسم المعدة</label>
+          <input type="text" class="form-input" id="esSearchBox" placeholder="اكتب اسم المعدة..." oninput="filterEquipmentList()">
+        </div>
+        <div class="form-group" style="margin:0;flex:1;">
+          <label class="form-label">اختر المعدة</label>
+          <select class="form-select" id="esEquipId" onchange="loadEquipmentStatement()">
+            <option value="">اختر المعدة</option>
+          </select>
+        </div>
+      </div>
+      <div id="esContent">
+        <div class="empty-state"><i class="fas fa-truck"></i><h3>اختر معدة لعرض كشف حسابها</h3></div>
+      </div>
+    </div>
+
+    <!-- المرفقات -->
+    <div class="page" id="page-attachments">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-images"></i><span>المرفقات والصور</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="openUploadModal()"><i class="fas fa-upload"></i> رفع صورة</button>
+      </div>
+      <div class="filter-row" style="background:var(--bg-card);padding:15px;border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="form-group" style="margin:0;">
+          <label class="form-label">النوع</label>
+          <select class="form-select" id="attFilterType" onchange="loadAttachments()">
+            <option value="">الكل</option>
+            <option value="invoice">فاتورة</option>
+            <option value="receipt">سند</option>
+            <option value="daily-equip">سجل معدة</option>
+            <option value="maintenance">صيانة</option>
+            <option value="purchase">مشترى</option>
+            <option value="fuel">محروقات</option>
+            <option value="material-supply">توريد مواد</option>
+            <option value="worker">عمال</option>
+            <option value="other">أخرى</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadAttachments()"><i class="fas fa-sync-alt"></i> تحديث</button>
+      </div>
+      <div class="grid-3" id="attachmentsGrid"></div>
+    </div>
+
+    <!-- التخطيط الذكي -->
+    <div class="page" id="page-smart-planner">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-magic"></i><span>مُخطط المشاريع الذكي</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="printCurrentPage()"><i class="fas fa-print"></i> طباعة</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><i class="fas fa-edit"></i><span>بيانات المشروع</span></h3>
+        </div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label">نوع المشروع *</label>
+              <select class="form-select" id="sp_projectType">
+                <option value="طريق رئيسي" selected>طريق رئيسي</option>
+                <option value="طريق سريع">طريق سريع</option>
+                <option value="طريق فرعي">طريق فرعي</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">الطول (كم) *</label>
+              <input type="number" class="form-input" id="sp_lengthKm" value="4" step="0.1" min="0.1">
+            </div>
+            <div class="form-group">
+              <label class="form-label">العرض (م) *</label>
+              <input type="number" class="form-input" id="sp_widthM" value="10" step="0.1" min="1">
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label">عدد الطبقات</label>
+              <input type="number" class="form-input" id="sp_layersCount" value="3" min="1" max="10">
+            </div>
+            <div class="form-group">
+              <label class="form-label">تاريخ البدء *</label>
+              <input type="date" class="form-input" id="sp_startDate" value="2026-10-01">
+            </div>
+            <div class="form-group">
+              <label class="form-label">المدة المطلوبة (يوم)</label>
+              <input type="number" class="form-input" id="sp_durationDays" value="180" min="30">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">القيمة التعاقدية (ر.ي) *</label>
+              <input type="number" class="form-input" id="sp_contractValue" value="2232800000" step="1000" min="1000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">الموقع</label>
+              <input type="text" class="form-input" id="sp_location" value="صنعاء" placeholder="مثال: صنعاء - طريق الستين">
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-auto" onclick="generateSmartPlan()" style="margin-top:10px;">
+            <i class="fas fa-magic"></i> 🚀 توليد الخطة الكاملة
+          </button>
+          <button type="button" class="btn btn-warning btn-auto" onclick="resetSmartPlanner()" style="margin-top:10px;">
+            <i class="fas fa-redo"></i> إعادة تعيين
+          </button>
+        </div>
+      </div>
+
+      <div id="sp_results" style="display:none;">
+        <div class="stats-grid" id="sp_stats"></div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-calendar-alt"></i><span>📅 الجدول الزمني</span></h3>
+            <div id="sp_timelineStatus"></div>
+          </div>
+          <div class="card-body">
+            <canvas id="sp_ganttChart" height="200"></canvas>
+            <div class="table-wrapper" style="margin-top:20px;">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>المرحلة</th>
+                    <th>الوصف</th>
+                    <th>المدة (يوم)</th>
+                    <th>من</th>
+                    <th>إلى</th>
+                  </tr>
+                </thead>
+                <tbody id="sp_timelineTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-users"></i><span>👥 التشكيل الفني</span></h3>
+              <span class="tag tag-info" id="sp_teamCount">0</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>الوظيفة</th>
+                    <th>العدد</th>
+                    <th>الراتب/شهر</th>
+                    <th>الإجمالي</th>
+                  </tr>
+                </thead>
+                <tbody id="sp_teamTable"></tbody>
+                <tfoot id="sp_teamFooter"></tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-truck-monster"></i><span>🚜 المعدات</span></h3>
+              <span class="tag tag-warning" id="sp_equipCount">0</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>النوع</th>
+                    <th>العدد</th>
+                    <th>الغرض</th>
+                    <th>الإيجار/شهر</th>
+                  </tr>
+                </thead>
+                <tbody id="sp_equipTable"></tbody>
+                <tfoot id="sp_equipFooter"></tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-coins"></i><span>💰 الميزانية التقديرية</span></h3>
+            <div id="sp_profitBadge"></div>
+          </div>
+          <div class="card-body">
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>الفئة</th>
+                    <th>النسبة</th>
+                    <th>المبلغ (ر.ي)</th>
+                  </tr>
+                </thead>
+                <tbody id="sp_budgetTable"></tbody>
+                <tfoot id="sp_budgetFooter"></tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-ol"></i><span>📋 بنود BOQ المقترحة</span></h3>
+            <span class="tag tag-purple" id="sp_boqCount">0 بند</span>
+          </div>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>الكود</th>
+                  <th>البند</th>
+                  <th>الوحدة</th>
+                  <th>الكمية</th>
+                  <th>سعر الوحدة</th>
+                  <th>الإجمالي</th>
+                </tr>
+              </thead>
+              <tbody id="sp_boqTable"></tbody>
+              <tfoot id="sp_boqFooter"></tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body" style="text-align:center;">
+            <button type="button" class="btn btn-success btn-auto" onclick="saveSmartPlan()" style="margin:5px;">
+              <i class="fas fa-save"></i> 💾 حفظ الخطة
+            </button>
+            <button type="button" class="btn btn-primary btn-auto" onclick="convertPlanToProject()" style="margin:5px;">
+              <i class="fas fa-rocket"></i> 📥 تحويل لمشروع
+            </button>
+            <button type="button" class="btn btn-warning btn-auto" onclick="printSmartPlan()" style="margin:5px;">
+              <i class="fas fa-print"></i> 🖨️ طباعة PDF
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- الخطط المحفوظة -->
+    <div class="page" id="page-saved-plans">
+      <div class="page-header">
+        <h1 class="page-title"><i class="fas fa-save"></i><span>الخطط المحفوظة</span></h1>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadSavedPlans()"><i class="fas fa-sync-alt"></i> تحديث</button>
+      </div>
+      <div class="card">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>التاريخ</th>
+                <th>النوع</th>
+                <th>الموقع</th>
+                <th>الطول</th>
+                <th>المدة</th>
+                <th>القيمة</th>
+                <th>الربح المتوقع</th>
+                <th>الحالة</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="savedPlansTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- الإعدادات -->
+    <div class="page" id="page-settings">
+      <div class="page-header"><h1 class="page-title"><i class="fas fa-cog"></i><span>الإعدادات</span></h1></div>
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fas fa-gas-pump"></i> أسعار المحروقات</h3></div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="form-group"><label class="form-label">سعر لتر الديزل (ر.ي)</label>
+              <input type="number" class="form-input" id="setDieselPrice" value="1080" step="1"></div>
+            <div class="form-group"><label class="form-label">سعر لتر البنزين (ر.ي)</label>
+              <input type="number" class="form-input" id="setPetrolPrice" value="1300" step="1"></div>
+            <div class="form-group"><label class="form-label">سعر لتر الزيت (ر.ي)</label>
+              <input type="number" class="form-input" id="setOilPrice" value="4000" step="1"></div>
+          </div>
+          <button type="button" class="btn btn-primary btn-auto" onclick="saveFuelPrices()"><i class="fas fa-save"></i> حفظ</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════ النوافذ ═══════ -->
+
+<!-- نافذة المشروع -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-road"></i><span id="projectModalTitle">مشروع جديد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('projectModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="projectId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">اسم المشروع *</label><input type="text" class="form-input" id="proj_name"></div>
+        <div class="form-group"><label class="form-label">الجهة المالكة *</label><input type="text" class="form-input" id="proj_client"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الموقع</label><input type="text" class="form-input" id="proj_location"></div>
+        <div class="form-group"><label class="form-label">نوع الطريق</label>
+          <select class="form-select" id="proj_roadType">
+            <option value="سريع">طريق سريع</option><option value="رئيسي" selected>طريق رئيسي</option>
+            <option value="فرعي">طريق فرعي</option><option value="ترابي">طريق ترابي</option>
+          </select></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">الطول (كم)</label><input type="number" class="form-input" id="proj_length" step="0.1"></div>
+        <div class="form-group"><label class="form-label">العرض (م)</label><input type="number" class="form-input" id="proj_roadWidth" step="0.1"></div>
+        <div class="form-group"><label class="form-label">قيمة العقد</label><input type="number" class="form-input" id="proj_contractValue"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">تاريخ البداية</label><input type="date" class="form-input" id="proj_startDate"></div>
+        <div class="form-group"><label class="form-label">تاريخ الانتهاء</label><input type="date" class="form-input" id="proj_endDate"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">مدير المشروع</label><input type="text" class="form-input" id="proj_manager"></div>
+        <div class="form-group"><label class="form-label">المهندس</label><input type="text" class="form-input" id="proj_engineer"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الحالة</label>
+          <select class="form-select" id="proj_status">
+            <option value="تخطيط">تخطيط</option><option value="قيد التنفيذ" selected>قيد التنفيذ</option>
+            <option value="مكتمل">مكتمل</option><option value="متوقف">متوقف</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">نسبة الإنجاز (%)</label><input type="number" class="form-input" id="proj_progress" min="0" max="100" value="0"></div>
+      </div>
+      <div class="form-group"><label class="form-label">الوصف</label><textarea class="form-textarea" id="proj_description" rows="3"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('projectModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveProject()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الموقع -->
+<div class="modal-overlay" id="siteModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-map-marked-alt"></i><span id="siteModalTitle">موقع جديد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('siteModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="siteId">
+      <div class="form-group"><label class="form-label">المشروع *</label>
+        <select class="form-select" id="site_projectId"><option value="">اختر</option></select></div>
+      <div class="form-group"><label class="form-label">اسم المقطع *</label><input type="text" class="form-input" id="site_name"></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">من كم *</label><input type="number" class="form-input" id="site_fromKm" step="0.1"></div>
+        <div class="form-group"><label class="form-label">إلى كم *</label><input type="number" class="form-input" id="site_toKm" step="0.1"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الحالة</label>
+          <select class="form-select" id="site_status">
+            <option value="تخطيط">تخطيط</option><option value="قيد التنفيذ" selected>قيد التنفيذ</option>
+            <option value="مكتمل">مكتمل</option><option value="متوقف">متوقف</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">المشرف</label><input type="text" class="form-input" id="site_supervisor"></div>
+      </div>
+      <div class="form-group"><label class="form-label">ملاحظات</label><textarea class="form-textarea" id="site_notes" rows="2"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('siteModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveSite()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة BOQ -->
+<div class="modal-overlay" id="boqModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-list-ol"></i><span id="boqModalTitle">بند جديد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('boqModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="boqId">
+      <div class="form-group"><label class="form-label">المشروع *</label>
+        <select class="form-select" id="boq_projectId"><option value="">اختر</option></select></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">كود البند</label>
+          <input type="text" class="form-input" id="boq_itemCode" placeholder="مثل: SEC-01"></div>
+        <div class="form-group"><label class="form-label">اسم البند *</label>
+          <input type="text" class="form-input" id="boq_name" placeholder="مثل: أعمال الردم"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الوحدة *</label>
+          <select class="form-select" id="boq_unit">
+            <option value="م³">م³</option><option value="م²">م²</option>
+            <option value="م طولي">م طولي</option><option value="طن">طن</option>
+            <option value="كيس">كيس</option><option value="عدد">عدد</option>
+            <option value="مقطوعية">مقطوعية</option><option value="رحلة">رحلة</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">سعر الوحدة (ر.ي) *</label>
+          <input type="number" class="form-input" id="boq_unitPrice" step="0.01"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الكمية التعاقدية *</label>
+          <input type="number" class="form-input" id="boq_contractQty" step="0.01" oninput="calcBOQTotal()"></div>
+        <div class="form-group"><label class="form-label">الكمية المنفذة</label>
+          <input type="number" class="form-input" id="boq_executedQty" step="0.01" value="0"></div>
+      </div>
+      <div class="form-group" style="background:var(--bg-hover);padding:15px;border-radius:var(--radius-sm);">
+        <label class="form-label" style="margin:0;">الإجمالي التعاقدي:</label>
+        <div style="font-size:22px;font-weight:800;color:var(--primary);" id="boq_totalDisplay">0 ر.ي</div>
+      </div>
+      <div class="form-group"><label class="form-label">ملاحظات</label>
+        <textarea class="form-textarea" id="boq_notes" rows="2"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('boqModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveBOQItem()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة المعدات -->
+<div class="modal-overlay" id="equipmentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-truck-monster"></i><span id="equipmentModalTitle">إضافة معدة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('equipmentModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="equipId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">اسم المعدة *</label><input type="text" class="form-input" id="equip_name"></div>
+        <div class="form-group"><label class="form-label">النوع *</label>
+          <select class="form-select" id="equip_type">
+            <option value="بوكلين">بوكلين</option><option value="شيول">شيول</option>
+            <option value="مدحلة">مدحلة</option><option value="جريدر">جريدر</option>
+            <option value="دركتر">دركتر</option><option value="قلاب">قلاب</option>
+            <option value="قاطرة">قاطرة</option><option value="شاحنة">شاحنة</option>
+            <option value="بوزة ماء">بوزة ماء</option><option value="وايت ماء">وايت ماء</option>
+            <option value="بوزة m.c">بوزة m.c</option><option value="دكاكة ربل">دكاكة ربل</option>
+            <option value="سيارة">سيارة</option><option value="جي سي بي">جي سي بي</option>
+            <option value="فرادة اسفلت">فرادة اسفلت</option><option value="خلاطة">خلاطة أسفلت</option>
+            <option value="كسارة">كسارة</option><option value="أخرى">أخرى</option>
+          </select></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">الموديل</label><input type="text" class="form-input" id="equip_model"></div>
+        <div class="form-group"><label class="form-label">رقم اللوحة</label><input type="text" class="form-input" id="equip_plateNumber"></div>
+        <div class="form-group"><label class="form-label">سنة الصنع</label><input type="number" class="form-input" id="equip_year"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الحالة *</label>
+          <select class="form-select" id="equip_status">
+            <option value="يعمل" selected>يعمل</option>
+            <option value="صيانة">صيانة</option><option value="متوقف">متوقف</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">الموقع الحالي</label><input type="text" class="form-input" id="equip_currentSite"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">المشغل (السائق)</label><input type="text" class="form-input" id="equip_operator"></div>
+        <div class="form-group"><label class="form-label">نوع المالك</label>
+          <select class="form-select" id="equip_ownerType">
+            <option value="شركة" selected>شركة</option><option value="شخص">شخص</option>
+          </select></div>
+      </div>
+      <div class="form-group"><label class="form-label">اسم المالك</label><input type="text" class="form-input" id="equip_owner"></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">نوع الاستخدام</label>
+          <select class="form-select" id="equip_usageType">
+            <option value="مملوكة" selected>مملوكة</option><option value="إيجار">إيجار</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">سعر الساعة (للإيجار)</label><input type="number" class="form-input" id="equip_hourlyRate" placeholder="0"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">تاريخ بداية العمل</label><input type="date" class="form-input" id="equip_workStartDate"></div>
+        <div class="form-group"><label class="form-label">سعر الشراء (ر.ي)</label><input type="number" class="form-input" id="equip_purchasePrice"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">آخر صيانة</label><input type="date" class="form-input" id="equip_lastMaintenance"></div>
+        <div class="form-group"><label class="form-label">الصيانة القادمة</label><input type="date" class="form-input" id="equip_nextMaintenance"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('equipmentModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveEquipment()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الصيانة -->
+<div class="modal-overlay" id="maintenanceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-tools"></i><span>تسجيل صيانة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('maintenanceModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">المعدة *</label>
+        <select class="form-select" id="mt_equipId"><option value="">اختر المعدة</option></select></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">تاريخ الصيانة *</label><input type="date" class="form-input" id="mt_date"></div>
+        <div class="form-group"><label class="form-label">النوع</label>
+          <select class="form-select" id="mt_type">
+            <option value="دورية">دورية</option><option value="طارئة">طارئة</option>
+            <option value="إصلاح">إصلاح</option><option value="تزييت">تزييت</option>
+          </select></div>
+      </div>
+      <div class="form-group"><label class="form-label">الوصف *</label><textarea class="form-textarea" id="mt_description" rows="2"></textarea></div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">التكلفة</label><input type="number" class="form-input" id="mt_cost"></div>
+        <div class="form-group"><label class="form-label">الورشة</label><input type="text" class="form-input" id="mt_workshop"></div>
+        <div class="form-group"><label class="form-label">الميكانيكي</label><input type="text" class="form-input" id="mt_mechanic"></div>
+      </div>
+      <div class="form-group"><label class="form-label">الصيانة القادمة</label><input type="date" class="form-input" id="mt_nextDate"></div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('mt_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور</p>
+        </div>
+        <input type="file" id="mt_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'mt')">
+        <div class="thumbs-row" id="mt_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('maintenanceModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveMaintenance()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة العمال -->
+<div class="modal-overlay" id="workerModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-hard-hat"></i><span id="workerModalTitle">إضافة عامل</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('workerModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="workerId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الاسم الكامل *</label><input type="text" class="form-input" id="worker_name"></div>
+        <div class="form-group"><label class="form-label">رقم الهوية</label><input type="text" class="form-input" id="worker_nationalId"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الوظيفة *</label>
+          <select class="form-select" id="worker_job">
+            <option value="">اختر الوظيفة</option>
+            <optgroup label="👔 الإدارة والهندسة">
+              <option value="مدير المشروع">مدير المشروع</option>
+              <option value="مهندس المشروع">مهندس المشروع</option>
+              <option value="مهندس مساحة">مهندس مساحة</option>
+              <option value="مهندس مختبر">مهندس مختبر</option>
+              <option value="مشرف ردميات">مشرف ردميات</option>
+              <option value="مشرف قطوعات">مشرف قطوعات</option>
+            </optgroup>
+            <optgroup label="🚜 السائقون">
+              <option value="سائق بوكلين">سائق بوكلين</option>
+              <option value="سائق جريدر">سائق جريدر</option>
+              <option value="سائق كسارة">سائق كسارة</option>
+              <option value="سائق دركتر">سائق دركتر</option>
+              <option value="سائق قلاب">سائق قلاب</option>
+              <option value="سائق قاطرة">سائق قاطرة</option>
+              <option value="سائق شاحنة">سائق شاحنة</option>
+              <option value="سائق بوزة ماء">سائق بوزة ماء</option>
+              <option value="سائق وايت ماء">سائق وايت ماء</option>
+              <option value="سائق بوزة m.c">سائق بوزة m.c</option>
+              <option value="سائق فرادة اسفلت">سائق فرادة اسفلت</option>
+              <option value="سائق دينة">سائق دينة</option>
+              <option value="سائق">سائق</option>
+            </optgroup>
+            <optgroup label="🔧 الفنيون والعمال">
+              <option value="فني">فني</option>
+              <option value="عامل">عامل</option>
+              <option value="عامل بناء">عامل بناء</option>
+              <option value="جنايني">جنايني</option>
+            </optgroup>
+            <optgroup label="📋 وظائف أخرى">
+              <option value="امين صندوق">امين صندوق</option>
+              <option value="مشتريات">مشتريات</option>
+              <option value="طباخ">طباخ</option>
+              <option value="محاسب">محاسب</option>
+              <option value="إداري">إداري</option>
+              <option value="أخرى">أخرى</option>
+            </optgroup>
+          </select></div>
+        <div class="form-group"><label class="form-label">رقم الجوال *</label><input type="tel" class="form-input" id="worker_phone"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الراتب الشهري (ر.ي)</label><input type="number" class="form-input" id="worker_salary"></div>
+        <div class="form-group"><label class="form-label">مصاريف يومية (ر.ي)</label><input type="number" class="form-input" id="worker_dailyWage"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">تاريخ الالتحاق</label><input type="date" class="form-input" id="worker_joinDate"></div>
+        <div class="form-group"><label class="form-label">الحالة</label>
+          <select class="form-select" id="worker_status">
+            <option value="يعمل" selected>يعمل</option>
+            <option value="إجازة">إجازة</option><option value="منتهي">منتهي</option>
+          </select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('workerModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveWorker()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة المواد -->
+<div class="modal-overlay" id="materialModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-boxes"></i><span id="materialModalTitle">إضافة مادة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('materialModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="matId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">اسم المادة *</label><input type="text" class="form-input" id="mat_name"></div>
+        <div class="form-group"><label class="form-label">الوحدة *</label>
+          <select class="form-select" id="mat_unit">
+            <option value="م طولي">م طولي</option><option value="م²">م²</option>
+            <option value="م³">م³</option><option value="زفة">زفة</option>
+            <option value="عدد">عدد</option><option value="كيس">كيس</option>
+            <option value="طن">طن</option><option value="لتر">لتر</option>
+            <option value="رحلة">رحلة</option><option value="أخرى">أخرى</option>
+          </select></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">السعر للوحدة *</label><input type="number" class="form-input" id="mat_price"></div>
+        <div class="form-group"><label class="form-label">المخزون الحالي</label><input type="number" class="form-input" id="mat_stock" value="0"></div>
+        <div class="form-group"><label class="form-label">الحد الأدنى *</label><input type="number" class="form-input" id="mat_minStock"></div>
+      </div>
+      <div class="form-group"><label class="form-label">موقع المخزن</label><input type="text" class="form-input" id="mat_location"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('materialModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveMaterial()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الموردين -->
+<div class="modal-overlay" id="supplierModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-handshake"></i><span id="supplierModalTitle">مورد جديد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('supplierModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="supId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">اسم المورد *</label><input type="text" class="form-input" id="sup_name"></div>
+        <div class="form-group"><label class="form-label">النوع</label>
+          <select class="form-select" id="sup_type">
+            <option value="مواد">مواد</option><option value="معدات">معدات</option>
+            <option value="خدمات">خدمات</option><option value="وقود">وقود</option>
+          </select></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">جهة الاتصال</label><input type="text" class="form-input" id="sup_contact"></div>
+        <div class="form-group"><label class="form-label">رقم الهاتف *</label><input type="tel" class="form-input" id="sup_phone"></div>
+      </div>
+      <div class="form-group"><label class="form-label">العنوان</label><input type="text" class="form-input" id="sup_address"></div>
+      <div class="form-group"><label class="form-label">ملاحظات</label><input type="text" class="form-input" id="sup_notes"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('supplierModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveSupplier()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة كشف حساب المورد -->
+<div class="modal-overlay" id="ledgerModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-file-invoice"></i><span id="ledgerTitle">كشف حساب مورد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('ledgerModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="ledgerBody"></div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('ledgerModal')" style="background:var(--border);">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الفواتير -->
+<div class="modal-overlay" id="invoiceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-file-invoice-dollar"></i><span id="invoiceModalTitle">فاتورة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('invoiceModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="invId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">النوع *</label>
+          <select class="form-select" id="inv_type">
+            <option value="مستخلص">مستخلص</option><option value="مورد">فاتورة مورد</option>
+            <option value="مصروف">مصروف</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="inv_date"></div>
+      </div>
+      <div class="form-group"><label class="form-label">المشروع</label>
+        <select class="form-select" id="inv_projectId"><option value="">بدون مشروع</option></select></div>
+      <div class="form-group"><label class="form-label">الجهة *</label><input type="text" class="form-input" id="inv_party"></div>
+      <div class="form-group"><label class="form-label">الوصف</label><textarea class="form-textarea" id="inv_description" rows="2"></textarea></div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">المبلغ *</label><input type="number" class="form-input" id="inv_amount" oninput="calcInvoiceRemaining()"></div>
+        <div class="form-group"><label class="form-label">المدفوع</label><input type="number" class="form-input" id="inv_paid" value="0" oninput="calcInvoiceRemaining()"></div>
+        <div class="form-group"><label class="form-label">المتبقي</label><input type="number" class="form-input" id="inv_remaining" readonly style="background:var(--bg-hover);"></div>
+      </div>
+      <div class="form-group"><label class="form-label">تاريخ الاستحقاق</label><input type="date" class="form-input" id="inv_dueDate"></div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('inv_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور الفاتورة</p>
+        </div>
+        <input type="file" id="inv_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'inv')">
+        <div class="thumbs-row" id="inv_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('invoiceModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveInvoice()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة المصروفات -->
+<div class="modal-overlay" id="expenseModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-money-bill-wave"></i><span id="expenseModalTitle">مصروف</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('expenseModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="expId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="exp_date"></div>
+        <div class="form-group"><label class="form-label">الفئة *</label>
+          <select class="form-select" id="exp_category">
+            <option value="وقود">وقود</option><option value="رواتب">رواتب</option>
+            <option value="صيانة">صيانة</option><option value="مواد">مواد</option>
+            <option value="إيجار">إيجار</option><option value="أخرى">أخرى</option>
+          </select></div>
+      </div>
+      <div class="form-group"><label class="form-label">المشروع</label>
+        <select class="form-select" id="exp_projectId"><option value="">بدون مشروع</option></select></div>
+      <div class="form-group"><label class="form-label">الوصف *</label><textarea class="form-textarea" id="exp_description" rows="2"></textarea></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">المبلغ *</label><input type="number" class="form-input" id="exp_amount"></div>
+        <div class="form-group"><label class="form-label">دفع بواسطة</label><input type="text" class="form-input" id="exp_paidBy"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('exp_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور السند</p>
+        </div>
+        <input type="file" id="exp_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'exp')">
+        <div class="thumbs-row" id="exp_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('expenseModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveExpense()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة السلامة -->
+<div class="modal-overlay" id="safetyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-shield-alt"></i><span>تقرير سلامة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('safetyModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="saf_date"></div>
+        <div class="form-group"><label class="form-label">النوع *</label>
+          <select class="form-select" id="saf_type">
+            <option value="تفتيش">تفتيش</option><option value="حادث">حادث</option>
+            <option value="تدريب">تدريب</option><option value="مخالفة">مخالفة</option>
+          </select></div>
+      </div>
+      <div class="form-group"><label class="form-label">المشروع</label>
+        <select class="form-select" id="saf_projectId"><option value="">بدون مشروع</option></select></div>
+      <div class="form-group"><label class="form-label">الوصف *</label><textarea class="form-textarea" id="saf_description" rows="2"></textarea></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الخطورة</label>
+          <select class="form-select" id="saf_severity">
+            <option value="منخفض">منخفض</option><option value="متوسط">متوسط</option>
+            <option value="عالي">عالي</option><option value="حرج">حرج</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">المسؤول</label><input type="text" class="form-input" id="saf_responsible"></div>
+      </div>
+      <div class="form-group"><label class="form-label">الإجراء</label><textarea class="form-textarea" id="saf_action" rows="2"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('safetyModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveSafety()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الجودة -->
+<div class="modal-overlay" id="qualityModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-clipboard-check"></i><span>فحص جودة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('qualityModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="qty_date"></div>
+        <div class="form-group"><label class="form-label">نوع الفحص *</label>
+          <select class="form-select" id="qty_testType">
+            <option value="كثافة الأسفلت">كثافة الأسفلت</option>
+            <option value="سماكة الطبقة">سماكة الطبقة</option>
+            <option value="الانحدار">الانحدار</option>
+            <option value="الحدل">درجة الحدل</option>
+          </select></div>
+      </div>
+      <div class="form-group"><label class="form-label">المشروع *</label>
+        <select class="form-select" id="qty_projectId"><option value="">اختر</option></select></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">النتيجة *</label><input type="text" class="form-input" id="qty_result"></div>
+        <div class="form-group"><label class="form-label">الحالة *</label>
+          <select class="form-select" id="qty_status">
+            <option value="مطابق">مطابق</option><option value="غير مطابق">غير مطابق</option>
+          </select></div>
+      </div>
+      <div class="form-group"><label class="form-label">المهندس</label><input type="text" class="form-input" id="qty_engineer"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('qualityModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveQuality()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الإنجاز -->
+<div class="modal-overlay" id="progressModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-tasks"></i><span>تقرير إنجاز</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('progressModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="prgId">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="prg_date"></div>
+        <div class="form-group"><label class="form-label">المشروع *</label>
+          <select class="form-select" id="prg_projectId" onchange="loadBOQForProgress()"><option value="">اختر</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الموقع</label>
+          <input type="text" class="form-input" id="prg_siteId"></div>
+        <div class="form-group"><label class="form-label">البند (BOQ) *</label>
+          <select class="form-select" id="prg_boqItemId" onchange="fillBOQUnit()"><option value="">اختر البند</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الطبقة *</label>
+          <select class="form-select" id="prg_layer">
+            <option value="أساس">طبقة الأساس</option><option value="رصف">طبقة الرصف</option>
+            <option value="سطح">الطبقة السطحية</option><option value="تحضير">تحضير</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">الكمية المنجزة *</label>
+          <input type="number" class="form-input" id="prg_quantity" step="0.01" placeholder="0">
+          <small style="color:var(--text-muted);font-size:12px;" id="prg_unitHint">الوحدة: —</small>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">كم منجز (اختياري)</label>
+        <input type="number" class="form-input" id="prg_workedKm" step="0.01"></div>
+      <div class="form-group"><label class="form-label">المشرف *</label><input type="text" class="form-input" id="prg_supervisor"></div>
+      <div class="form-group"><label class="form-label">ملاحظات</label><textarea class="form-textarea" id="prg_notes" rows="2"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('progressModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveProgress()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة سجل المعدات اليومي -->
+<div class="modal-overlay" id="dailyEquipModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-truck-monster"></i><span id="dailyEquipTitle">تسجيل عمل معدة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('dailyEquipModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="delLogId">
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="del_date"></div>
+        <div class="form-group"><label class="form-label">المعدة *</label>
+          <select class="form-select" id="del_equipId" onchange="fillEquipOperator()"><option value="">اختر</option></select></div>
+        <div class="form-group"><label class="form-label">المشروع *</label>
+          <select class="form-select" id="del_projectId"><option value="">اختر</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الموقع</label><input type="text" class="form-input" id="del_siteId"></div>
+        <div class="form-group"><label class="form-label">المشغل</label><input type="text" class="form-input" id="del_operator"></div>
+      </div>
+      <h4 style="color:var(--primary);margin:15px 0 10px;">☀️ الفترة الصباحية</h4>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">من</label><input type="time" class="form-input" id="del_morningFrom"></div>
+        <div class="form-group"><label class="form-label">إلى</label><input type="time" class="form-input" id="del_morningTo"></div>
+      </div>
+      <h4 style="color:var(--primary);margin:15px 0 10px;">🌙 الفترة المسائية</h4>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">من</label><input type="time" class="form-input" id="del_eveningFrom"></div>
+        <div class="form-group"><label class="form-label">إلى</label><input type="time" class="form-input" id="del_eveningTo"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">كمية الديزل (لتر)</label><input type="number" class="form-input" id="del_dieselQty" step="0.01"></div>
+        <div class="form-group"><label class="form-label">الكم المنجز (م³)</label><input type="number" class="form-input" id="del_workedQty" step="0.01"></div>
+        <div class="form-group"><label class="form-label">المشرف</label><input type="text" class="form-input" id="del_supervisor"></div>
+      </div>
+      <div class="form-group"><label class="form-label">وصف العمل</label><textarea class="form-textarea" id="del_workDescription" rows="2"></textarea></div>
+      <div class="form-group"><label class="form-label">ملاحظات</label><input type="text" class="form-input" id="del_notes"></div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('del_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور</p>
+        </div>
+        <input type="file" id="del_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'del')">
+        <div class="thumbs-row" id="del_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('dailyEquipModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveDailyEquipLog()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة سجل العمال اليومي -->
+<div class="modal-overlay" id="dailyWorkerModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-user-clock"></i><span id="dailyWorkerTitle">تسجيل عمل عامل</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('dailyWorkerModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="dwlLogId">
+      <input type="hidden" id="dwl_baseDailyWage">
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="dwl_date"></div>
+        <div class="form-group"><label class="form-label">العامل *</label>
+          <select class="form-select" id="dwl_workerId" onchange="fillWorkerJob()"><option value="">اختر</option></select></div>
+        <div class="form-group"><label class="form-label">الوظيفة</label><input type="text" class="form-input" id="dwl_job" readonly style="background:var(--bg-hover);"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">المشروع</label>
+          <select class="form-select" id="dwl_projectId"><option value="">اختر</option></select></div>
+        <div class="form-group"><label class="form-label">الموقع</label><input type="text" class="form-input" id="dwl_siteId"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الحضور</label>
+          <select class="form-select" id="dwl_attendance" onchange="recalcWorkerNet()">
+            <option value="حاضر">حاضر</option><option value="غائب">غائب</option><option value="إجازة">إجازة</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">مصاريف يوميه (ر.ي)</label><input type="number" class="form-input" id="dwl_dailyWage" oninput="recalcWorkerNet()"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">الساعات الإضافية</label><input type="number" class="form-input" id="dwl_overtime" value="0" step="0.5" oninput="recalcWorkerNet()"></div>
+        <div class="form-group"><label class="form-label" style="color:var(--danger);">خصم (ر.ي)</label><input type="number" class="form-input" id="dwl_discount" value="0" oninput="recalcWorkerNet()"></div>
+        <div class="form-group"><label class="form-label" style="color:var(--success);">حافز (ر.ي)</label><input type="number" class="form-input" id="dwl_bonus" value="0" oninput="recalcWorkerNet()"></div>
+      </div>
+      <div class="form-group" style="background:var(--bg-hover);padding:15px;border-radius:var(--radius-sm);">
+        <label class="form-label" style="margin:0;">الصافي المستحق:</label>
+        <div style="font-size:24px;font-weight:800;color:var(--primary);" id="dwl_netDisplay">0 ر.ي</div>
+        <div id="dwl_breakdown" style="font-size:12px;color:var(--text-muted);margin-top:6px;"></div>
+      </div>
+      <div class="form-group"><label class="form-label">وصف العمل</label><input type="text" class="form-input" id="dwl_workDescription"></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">المشرف</label><input type="text" class="form-input" id="dwl_supervisor"></div>
+        <div class="form-group"><label class="form-label">ملاحظات</label><input type="text" class="form-input" id="dwl_notes"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">☑️ حالة الاستلام</label>
+        <select class="form-select" id="dwl_paymentStatus">
+          <option value="لم يستلم">⏳ لم يستلم</option>
+          <option value="استلم">✅ استلم</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('dwl_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور</p>
+        </div>
+        <input type="file" id="dwl_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'dwl')">
+        <div class="thumbs-row" id="dwl_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('dailyWorkerModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveDailyWorkersLog()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة توريد المواد -->
+<div class="modal-overlay" id="materialSupplyModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-truck-loading"></i><span id="materialSupplyTitle">توريد مادة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('materialSupplyModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="msSupplyId">
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="ms_date"></div>
+        <div class="form-group"><label class="form-label">المادة *</label>
+          <select class="form-select" id="ms_matId" onchange="fillMaterialName()"><option value="">اختر</option></select></div>
+        <div class="form-group"><label class="form-label">الوحدة</label><input type="text" class="form-input" id="ms_unit" readonly style="background:var(--bg-hover);"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">من موقع (المصدر)</label><input type="text" class="form-input" id="ms_fromLocation"></div>
+        <div class="form-group"><label class="form-label">إلى مشروع *</label>
+          <select class="form-select" id="ms_toProjectId"><option value="">اختر</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">إلى موقع</label><input type="text" class="form-input" id="ms_toSiteId"></div>
+        <div class="form-group"><label class="form-label">المورد</label>
+          <select class="form-select" id="ms_supplierId"><option value="">اختر</option></select></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">عدد الزفات *</label><input type="number" class="form-input" id="ms_zafatCount" oninput="calcSupplyTotal()"></div>
+        <div class="form-group"><label class="form-label">حجم الزفة</label><input type="number" class="form-input" id="ms_zafaSize" oninput="calcSupplyTotal()"></div>
+        <div class="form-group"><label class="form-label">الكمية الإجمالية</label><input type="number" class="form-input" id="ms_totalQuantity" readonly style="background:var(--bg-hover);font-weight:800;color:var(--success);"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">السائق *</label>
+          <select class="form-select" id="ms_driverName"><option value="">اختر السائق</option></select>
+          <small style="color:var(--text-muted);font-size:11px;">يعرض السائقين المؤهلين فقط</small>
+        </div>
+        <div class="form-group"><label class="form-label">رقم الشاحنة</label><input type="text" class="form-input" id="ms_truckNumber"></div>
+        <div class="form-group"><label class="form-label">التكلفة (ر.ي)</label><input type="number" class="form-input" id="ms_cost"></div>
+      </div>
+      <div class="form-group"><label class="form-label">ملاحظات</label><input type="text" class="form-input" id="ms_notes"></div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('ms_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور السند</p>
+        </div>
+        <input type="file" id="ms_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'ms')">
+        <div class="thumbs-row" id="ms_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('materialSupplyModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveMaterialSupply()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة المحروقات -->
+<div class="modal-overlay" id="fuelModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-gas-pump"></i><span>تسجيل محروقات</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('fuelModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="fl_date"></div>
+        <div class="form-group"><label class="form-label">المعدة/السيارة *</label>
+          <select class="form-select" id="fl_equipId"><option value="">اختر</option></select></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">نوع الوقود</label>
+          <select class="form-select" id="fl_fuelType">
+            <option value="ديزل">ديزل</option><option value="بنزين">بنزين</option><option value="زيت">زيت</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">الكمية (لتر) *</label><input type="number" class="form-input" id="fl_quantity" oninput="calcFuelTotal()"></div>
+        <div class="form-group"><label class="form-label">سعر اللتر</label><input type="number" class="form-input" id="fl_pricePerLiter" value="1080" oninput="calcFuelTotal()"></div>
+      </div>
+      <div class="form-group"><label class="form-label">الإجمالي</label><input type="number" class="form-input" id="fl_totalCost" readonly style="background:var(--bg-hover);font-weight:800;color:var(--success);font-size:18px;"></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">المحطة</label><input type="text" class="form-input" id="fl_location"></div>
+        <div class="form-group"><label class="form-label">رقم الإيصال</label><input type="text" class="form-input" id="fl_receiptNumber"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">السائق</label><input type="text" class="form-input" id="fl_driver"></div>
+        <div class="form-group"><label class="form-label">ملاحظات</label><input type="text" class="form-input" id="fl_notes"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('fl_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور الإيصال</p>
+        </div>
+        <input type="file" id="fl_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'fl')">
+        <div class="thumbs-row" id="fl_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('fuelModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="saveFuelLog()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة المشتريات -->
+<div class="modal-overlay" id="purchaseModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-shopping-cart"></i><span>مشترى جديد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('purchaseModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">التاريخ *</label><input type="date" class="form-input" id="pur_date"></div>
+        <div class="form-group"><label class="form-label">المورد</label>
+          <select class="form-select" id="pur_supplierId"><option value="">بدون مورد</option></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">اسم الصنف *</label><input type="text" class="form-input" id="pur_itemName"></div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">الفئة</label>
+          <select class="form-select" id="pur_category">
+            <option value="قطع غيار">قطع غيار</option><option value="زيوت">زيوت</option>
+            <option value="أدوات">أدوات</option><option value="مواد بناء">مواد بناء</option>
+            <option value="قرطاسية">قرطاسية</option><option value="أخرى">أخرى</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">الوحدة</label><input type="text" class="form-input" id="pur_unit"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">الكمية *</label><input type="number" class="form-input" id="pur_quantity" oninput="calcPurchaseTotal()"></div>
+        <div class="form-group"><label class="form-label">السعر *</label><input type="number" class="form-input" id="pur_price" oninput="calcPurchaseTotal()"></div>
+        <div class="form-group"><label class="form-label">الإجمالي</label><input type="number" class="form-input" id="pur_totalCost" readonly style="background:var(--bg-hover);font-weight:800;color:var(--success);"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label class="form-label">رقم الفاتورة</label><input type="text" class="form-input" id="pur_invoiceNumber"></div>
+        <div class="form-group"><label class="form-label">المدفوع</label><input type="number" class="form-input" id="pur_paid" value="0"></div>
+        <div class="form-group"><label class="form-label">المتبقي</label><input type="number" class="form-input" id="pur_remaining" readonly style="background:var(--bg-hover);"></div>
+      </div>
+      <div class="form-group"><label class="form-label">ملاحظات</label><input type="text" class="form-input" id="pur_notes"></div>
+      <div class="form-group">
+        <label class="form-label">📷 المرفقات</label>
+        <div class="upload-zone" onclick="document.getElementById('pur_files').click()">
+          <i class="fas fa-camera"></i><p>اضغط لاختيار صور الفاتورة</p>
+        </div>
+        <input type="file" id="pur_files" accept="image/*" capture="environment" multiple style="display:none" onchange="handleModalUpload(this,'pur')">
+        <div class="thumbs-row" id="pur_thumbs"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('purchaseModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="savePurchase()"><i class="fas fa-save"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة دفع راتب -->
+<div class="modal-overlay" id="salaryPayModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-money-bill-wave"></i><span>دفع راتب</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('salaryPayModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="sp_workerId">
+      <input type="hidden" id="sp_month">
+      <input type="hidden" id="sp_netSalary">
+      <input type="hidden" id="sp_baseSalary">
+      <input type="hidden" id="sp_presentDays">
+      <input type="hidden" id="sp_totalWages">
+      <input type="hidden" id="sp_totalDiscounts">
+      <input type="hidden" id="sp_totalBonuses">
+      
+      <div style="padding:15px;background:var(--bg-hover);border-radius:8px;margin-bottom:15px;">
+        <div style="font-weight:700;font-size:18px;margin-bottom:10px;" id="sp_workerName">—</div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>الشهر:</span><strong id="sp_monthLabel">—</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>صافي الراتب:</span>
+          <strong style="color:var(--primary);font-size:18px;" id="sp_netLabel">0 ر.ي</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>المدفوع سابقاً:</span><strong id="sp_paidLabel">0 ر.ي</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>المتبقي:</span>
+          <strong style="color:var(--danger);" id="sp_remainingLabel">0 ر.ي</strong>
+        </div>
+      </div>
+      
+      <div class="limit-box" id="sp_limitBox">
+        <div class="label">💰 السقف المتاح للسحب</div>
+        <div class="value" id="sp_limitValue">جاري الحساب...</div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">المبلغ المدفوع الآن *</label>
+        <input type="number" class="form-input" id="sp_paid" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">تاريخ الدفع</label>
+        <input type="date" class="form-input" id="sp_paidDate">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ملاحظات</label>
+        <input type="text" class="form-input" id="sp_notes">
+      </div>
+      
+      <div class="withdrawal-history" id="sp_historyBox" style="display:none;">
+        <strong style="font-size:13px;display:block;margin-bottom:8px;">📋 السحوبات السابقة:</strong>
+        <div id="sp_historyList"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('salaryPayModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="confirmSalaryPayment()">
+        <i class="fas fa-save"></i> حفظ
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة التقرير الشهري -->
+<div class="modal-overlay" id="monthlyAttendanceModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-calendar-alt"></i><span>التقرير الشهري للحضور</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('monthlyAttendanceModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="filter-row">
+        <div class="form-group" style="margin:0;"><label class="form-label">السنة</label>
+          <input type="number" class="form-input" id="monthlyYear" style="max-width:120px;"></div>
+        <div class="form-group" style="margin:0;"><label class="form-label">الشهر</label>
+          <select class="form-select" id="monthlyMonth" style="max-width:150px;">
+            <option value="1">يناير</option><option value="2">فبراير</option>
+            <option value="3">مارس</option><option value="4">أبريل</option>
+            <option value="5">مايو</option><option value="6">يونيو</option>
+            <option value="7">يوليو</option><option value="8">أغسطس</option>
+            <option value="9">سبتمبر</option><option value="10">أكتوبر</option>
+            <option value="11">نوفمبر</option><option value="12">ديسمبر</option>
+          </select></div>
+        <button type="button" class="btn btn-primary btn-auto" onclick="loadMonthlyAttendance()"><i class="fas fa-search"></i> عرض</button>
+        <button type="button" class="btn btn-success btn-auto" onclick="printMonthlyAttendance()"><i class="fas fa-print"></i> طباعة التقرير</button>
+      </div>
+      <div id="monthlyAttendanceContent" style="overflow-x:auto;font-size:12px;"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('monthlyAttendanceModal')" style="background:var(--border);">إغلاق</button>
+      <button type="button" class="btn btn-primary btn-auto" onclick="printMonthlyAttendance()"><i class="fas fa-print"></i> طباعة</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة رفع ملف -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-upload"></i><span>رفع صورة/مستند</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('uploadModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">نوع المرفق *</label>
+        <select class="form-select" id="up_refType">
+          <option value="invoice">فاتورة</option>
+          <option value="receipt">سند</option>
+          <option value="daily-equip">سجل معدة</option>
+          <option value="maintenance">صيانة</option>
+          <option value="purchase">مشترى</option>
+          <option value="fuel">محروقات</option>
+          <option value="material-supply">توريد مواد</option>
+          <option value="worker">عمال</option>
+          <option value="other">أخرى</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">معرّف المرجع (اختياري)</label>
+        <input type="text" class="form-input" id="up_refId">
+      </div>
+      <div class="form-group">
+        <label class="form-label">الملف *</label>
+        <input type="file" class="form-input" id="up_file" accept="image/*,.pdf" capture="environment">
+      </div>
+      <div id="up_preview" style="text-align:center;padding:10px;background:var(--bg-hover);border-radius:8px;min-height:100px;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+        <i class="fas fa-image" style="font-size:40px;color:var(--text-muted);"></i>
+        <p style="color:var(--text-muted);font-size:13px;margin-top:10px;">لا يوجد ملف</p>
+      </div>
+      <div class="form-group" style="margin-top:15px;">
+        <label class="form-label">ملاحظات</label>
+        <input type="text" class="form-input" id="up_notes">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('uploadModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-primary btn-auto" id="uploadBtn" onclick="doUpload()"><i class="fas fa-upload"></i> رفع</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة معاينة صورة -->
+<div class="modal-overlay" id="imageViewModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-image"></i><span>معاينة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('imageViewModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="text-align:center;">
+      <img id="viewImageEl" style="max-width:100%;max-height:70vh;border-radius:8px;" src="">
+    </div>
+    <div class="modal-footer">
+      <a id="downloadImageLink" class="btn btn-primary btn-auto" target="_blank" rel="noopener">
+        <i class="fas fa-external-link-alt"></i> فتح في Drive
+      </a>
+      <button type="button" class="btn" onclick="closeModalById('imageViewModal')" style="background:var(--border);">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة حفظ الخطة -->
+<div class="modal-overlay" id="savePlanModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-save"></i><span>حفظ الخطة</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('savePlanModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">اسم الخطة</label>
+        <input type="text" class="form-input" id="sp_planName" placeholder="مثال: طريق الستين 4 كم">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ملاحظات</label>
+        <textarea class="form-textarea" id="sp_planNotes" rows="3" placeholder="ملاحظات إضافية..."></textarea>
+      </div>
+      <div style="background:var(--bg-hover);padding:15px;border-radius:8px;">
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>نوع المشروع:</span><strong id="sp_confirm_type">—</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>الطول:</span><strong id="sp_confirm_length">—</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>القيمة التعاقدية:</span><strong id="sp_confirm_value">—</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span>المدة المتوقعة:</span><strong id="sp_confirm_duration">—</strong>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('savePlanModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-success btn-auto" onclick="confirmSavePlan()">
+        <i class="fas fa-save"></i> حفظ
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- تأكيد -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i><span>تأكيد</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('confirmModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body"><p id="confirmMessage" style="font-size:15px;line-height:1.7;">هل أنت متأكد؟</p></div>
+    <div class="modal-footer">
+      <button type="button" class="btn" onclick="closeModalById('confirmModal')" style="background:var(--border);">إلغاء</button>
+      <button type="button" class="btn btn-danger" id="confirmBtn"><i class="fas fa-trash"></i> تأكيد</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div></div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/workers.js"></script>
+<script src="js/equipment.js"></script>
+<script src="js/daily-logs.js"></script>
+<script src="js/supplies.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/attachments.js"></script>
+<script src="js/statements.js"></script>
+<script src="js/smart-planner.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
