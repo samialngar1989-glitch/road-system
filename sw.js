@@ -1,5 +1,5 @@
 // Service Worker - يسمح بتثبيت التطبيق والعمل بدون إنترنت
-const CACHE_NAME = 'road-system-v1';
+const CACHE_NAME = 'road-system-v3';
 const URLS_TO_CACHE = [
   './',
   './index.html',
