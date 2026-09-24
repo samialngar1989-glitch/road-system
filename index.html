@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🛣️ نظام شركة هندسة الطرقات</title>
 <meta name="theme-color" content="#2563eb">
+  <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjM4IiBmaWxsPSIjMjU2M2ViIi8+PHRleHQgeD0iOTYiIHk9IjEyNSIgZm9udC1zaXplPSIxMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIj7wn5uhaDwvdGV4dD48L3N2Zz4=">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="الطرقات">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -23,6 +28,8 @@
       <button class="icon-btn" id="themeBtn" title="الوضع الليلي"><i class="fas fa-moon"></i></button>
       <button class="icon-btn" id="refreshBtn" title="تحديث"><i class="fas fa-sync-alt"></i></button>
       <button class="icon-btn" id="printCurrentBtn" title="طباعة الصفحة"><i class="fas fa-print"></i></button>
+      <button class="icon-btn" id="installPwaBtn" title="تثبيت التطبيق" style="display:none;background:var(--success);color:#fff;"><i class="fas fa-download"></i></button>
+<button class="icon-btn" id="infoBtn" title="عن التطبيق والمطور"><i class="fas fa-info-circle"></i></button>
     </div>
   </header>
 
@@ -2159,7 +2166,74 @@
     </div>
   </div>
 </div>
+<!-- نافذة عن التطبيق والمطور -->
+<div class="modal-overlay" id="infoModal">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fas fa-info-circle"></i><span>عن التطبيق والمطور</span></h2>
+      <button type="button" class="modal-close" onclick="closeModalById('infoModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="text-align:right;line-height:1.9;">
+      
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="width:80px;height:80px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-radius:20px;display:inline-flex;align-items:center;justify-content:center;font-size:40px;color:#fff;box-shadow:0 8px 20px rgba(37,99,235,.3);margin-bottom:12px;">
+          🛣️
+        </div>
+        <h3 style="color:var(--primary);margin:0 0 5px;">نظام شركة هندسة الطرقات</h3>
+        <p style="color:var(--text-muted);font-size:13px;margin:0;">الإصدار 9.1.0</p>
+      </div>
 
+      <div style="background:var(--bg-hover);padding:15px;border-radius:12px;margin-bottom:15px;border-right:4px solid var(--primary);">
+        <h4 style="color:var(--primary);margin:0 0 8px;font-size:15px;"><i class="fas fa-bullseye"></i> عن التطبيق</h4>
+        <p style="margin:0;font-size:13px;color:var(--text);">
+          نظام متكامل لإدارة شركات هندسة الطرقات والمقاولات، يوفر:
+        </p>
+        <ul style="margin:8px 0 0;padding-right:20px;font-size:13px;color:var(--text-muted);">
+          <li>إدارة المشاريع والمواقع وبنود BOQ</li>
+          <li>متابعة المعدات والعمال والمواد</li>
+          <li>تسجيل السجلات اليومية والحضور</li>
+          <li>الفواتير والمصروفات والموردين</li>
+          <li>كشوف الرواتب وحسابات العمال والمعدات</li>
+          <li>مخطط مشاريع ذكي يولّد خطة كاملة</li>
+          <li>تقارير متقدمة وكاشف أخطاء</li>
+        </ul>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(6,182,212,.1));padding:15px;border-radius:12px;margin-bottom:15px;border-right:4px solid var(--success);">
+        <h4 style="color:var(--success);margin:0 0 8px;font-size:15px;"><i class="fas fa-mobile-alt"></i> تثبيت كتطبيق</h4>
+        <p style="margin:0;font-size:13px;color:var(--text-muted);">
+          اضغط زر <i class="fas fa-download" style="color:var(--success);"></i> الأخضر في الأعلى لتثبيت التطبيق على شاشة هاتفك، وسيعمل مثل التطبيقات العادية بدون فتح المتصفح.
+        </p>
+      </div>
+
+      <div style="background:var(--bg-hover);padding:15px;border-radius:12px;border-right:4px solid var(--gold);">
+        <h4 style="color:var(--gold);margin:0 0 8px;font-size:15px;"><i class="fas fa-user-tie"></i> عن المطور</h4>
+        <p style="margin:0;font-size:14px;font-weight:700;color:var(--text);">
+          سامي النجار
+        </p>
+        <p style="margin:5px 0;font-size:13px;color:var(--text-muted);">
+          <i class="fas fa-code"></i> مطوّر ومحب للبرمجة
+        </p>
+        <p style="margin:5px 0;font-size:13px;color:var(--text-muted);">
+          <i class="fas fa-map-marker-alt"></i> اليمن
+        </p>
+        <p style="margin:10px 0 0;font-size:13px;color:var(--text-muted);font-style:italic;">
+          "تم تطوير هذا النظام بشغف لخدمة شركات المقاولات والطرقات"
+        </p>
+      </div>
+
+      <div style="margin-top:15px;padding:12px;background:var(--bg-hover);border-radius:8px;text-align:center;font-size:12px;color:var(--text-muted);">
+        <i class="fas fa-copyright"></i> 2026 — جميع الحقوق محفوظة
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary btn-auto" onclick="closeModalById('infoModal')">
+        <i class="fas fa-check"></i> فهمت
+      </button>
+    </div>
+  </div>
+</div>
 <div class="toast-container" id="toastContainer"></div>
 <div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div></div>
 
@@ -2168,6 +2242,7 @@
 <script src="js/logs.js"></script>
 <script src="js/reports.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/pwa.js"></script>
 
 </body>
 </html>
