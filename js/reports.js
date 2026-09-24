@@ -240,12 +240,33 @@ function printSmartPlan() {
   if (!currentPlanData) { showToast('⚠️ لا توجد خطة للطباعة', 'warning'); return; }
   try {
     const planHtml = buildPrintablePlan();
-    const printWindow = window.open('', 'PrintPlan', 'width=1400,height=900,noopener,noreferrer');
-    if (!printWindow) { showToast('⚠️ يرجى السماح بالنوافذ المنبثقة', 'warning'); return; }
-    printWindow.document.open();
-    printWindow.document.write(planHtml);
-    printWindow.document.close();
-  } catch (err) { showToast('❌ فشل الطباعة: ' + err.message, 'error'); }
+    
+    // استخدام Blob بدلاً من document.write (يعمل على الجوال)
+    const blob = new Blob([planHtml], { type: 'text/html;charset=utf-8' });
+    const blobUrl = URL.createObjectURL(blob);
+    
+    const w = window.open(blobUrl, '_blank');
+    
+    if (!w) {
+      // إذا حجب المتصفح، استخدم رابط تحميل مباشر
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('⚠️ إذا لم تُفتح، اسمح بالنوافذ المنبثقة', 'warning');
+    } else {
+      showToast('✅ سيتم فتح نافذة الطباعة', 'success');
+    }
+    
+    // تنظيف الذاكرة بعد دقيقة
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+  } catch (err) {
+    showToast('❌ فشل الطباعة: ' + err.message, 'error');
+    console.error(err);
+  }
 }
 
 function buildPrintablePlan() {
