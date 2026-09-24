@@ -123,55 +123,81 @@ function printCurrentPage() {
   const title = pageEl.querySelector('.page-title span')?.textContent || 'تقرير';
   const content = pageEl.innerHTML;
 
-  const w = window.open('', 'PrintPage', 'width=1200,height=800,noopener,noreferrer');
-  if (!w) { showToast('⚠️ يرجى السماح بالنوافذ المنبثقة', 'warning'); return; }
+  // بناء محتوى التقرير
+  const htmlContent = `<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>${title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:'Tajawal',sans-serif;padding:20px;background:#fff;color:#0f172a;direction:rtl}
+  h1,h2,h3{color:#2563eb}
+  table{width:100%;border-collapse:collapse;font-size:12px;margin-top:15px}
+  th{background:#2563eb !important;color:#fff !important;padding:10px;text-align:right;font-weight:700}
+  td{border:1px solid #e2e8f0;padding:8px;text-align:right}
+  tr:nth-child(even){background:#f8fafc}
+  .tag{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+  .tag-success{background:#dcfce7;color:#166534}
+  .tag-warning{background:#fef3c7;color:#92400e}
+  .tag-danger{background:#fee2e2;color:#991b1b}
+  .tag-info{background:#dbeafe;color:#1e40af}
+  .tag-gray{background:#f1f5f9;color:#475569}
+  .tag-purple{background:#e9d5ff;color:#6b21a8}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
+  .stat-card{padding:12px;border:1px solid #e2e8f0;border-radius:8px;text-align:center;background:#f8fafc}
+  .stat-info h3{margin:0;font-size:20px;color:#2563eb}
+  .stat-info p{margin:4px 0 0;font-size:11px;color:#64748b}
+  .stat-icon{display:none}
+  .btn,.icon-btn,.menu-toggle,.modal-close,.upload-zone,.filter-row,.actions-cell,.nav-section{display:none !important}
+  .card{border:1px solid #e2e8f0;border-radius:8px;margin-bottom:15px;background:#fff}
+  .card-header{padding:12px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
+  .card-body{padding:12px}
+  .page-header{margin-bottom:20px;border-bottom:3px solid #2563eb;padding-bottom:10px;display:flex;justify-content:space-between}
+  .page-title{font-size:22px;margin:0;display:flex;align-items:center;gap:10px}
+  .progress-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#2563eb}
+  @media print{@page{size:A4 landscape;margin:10mm}}
+</style>
+</head>
+<body>
+  <div style="text-align:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid #2563eb">
+    <h1 style="margin:0;color:#2563eb">🛣️ شركة الطرق للهندسة والمقاولات</h1>
+    <p style="margin:5px 0;color:#64748b;font-size:13px;">تقرير: ${title} - ${new Date().toLocaleDateString('ar-YE')}</p>
+  </div>
+  ${content}
+  <div style="margin-top:30px;text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;">
+    نظام شركة هندسة الطرقات v${CONFIG.VERSION} - تاريخ الطباعة: ${new Date().toLocaleString('ar-YE')}
+  </div>
+  <script>setTimeout(function(){window.print();},700);<\/script>
+</body>
+</html>`;
+
+  // تحميل كـ Blob (يعمل على كل المتصفحات بما فيها الجوال)
+  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+  const blobUrl = URL.createObjectURL(blob);
   
-  w.document.write(`<html dir="rtl" lang="ar"><head><title>${title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-      *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-      body{font-family:'Tajawal',sans-serif;padding:20px;background:#fff;color:#0f172a}
-      h1,h2,h3{color:#2563eb}
-      table{width:100%;border-collapse:collapse;font-size:12px;margin-top:15px}
-      th{background:#2563eb !important;color:#fff !important;padding:10px;text-align:right;font-weight:700}
-      td{border:1px solid #e2e8f0;padding:8px;text-align:right}
-      tr:nth-child(even){background:#f8fafc}
-      .tag{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
-      .tag-success{background:#dcfce7;color:#166534}
-      .tag-warning{background:#fef3c7;color:#92400e}
-      .tag-danger{background:#fee2e2;color:#991b1b}
-      .tag-info{background:#dbeafe;color:#1e40af}
-      .tag-gray{background:#f1f5f9;color:#475569}
-      .tag-purple{background:#e9d5ff;color:#6b21a8}
-      .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
-      .stat-card{padding:12px;border:1px solid #e2e8f0;border-radius:8px;text-align:center;background:#f8fafc}
-      .stat-info h3{margin:0;font-size:20px;color:#2563eb}
-      .stat-info p{margin:4px 0 0;font-size:11px;color:#64748b}
-      .stat-icon{display:none}
-      .btn,.icon-btn,.menu-toggle,.modal-close,.upload-zone,.filter-row,.actions-cell,.nav-section{display:none !important}
-      .card{border:1px solid #e2e8f0;border-radius:8px;margin-bottom:15px;background:#fff}
-      .card-header{padding:12px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
-      .card-body{padding:12px}
-      .page-header{margin-bottom:20px;border-bottom:3px solid #2563eb;padding-bottom:10px;display:flex;justify-content:space-between}
-      .page-title{font-size:22px;margin:0;display:flex;align-items:center;gap:10px}
-      .progress-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
-      .progress-fill{height:100%;background:#2563eb}
-      @media print{@page{size:A4 landscape;margin:10mm}}
-    </style>
-  </head><body>
-    <div style="text-align:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid #2563eb">
-      <h1 style="margin:0;color:#2563eb">🛣️ شركة الطرق للهندسة والمقاولات</h1>
-      <p style="margin:5px 0;color:#64748b;font-size:13px;">تقرير: ${title} - ${new Date().toLocaleDateString('ar-YE')}</p>
-    </div>
-    ${content}
-    <div style="margin-top:30px;text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;">
-      نظام شركة هندسة الطرقات v${CONFIG.VERSION} - تاريخ الطباعة: ${new Date().toLocaleString('ar-YE')}
-    </div>
-    <script>setTimeout(()=>window.print(),800)<\/script>
-  </body></html>`);
-  w.document.close();
+  // فتح في تاب جديد
+  const w = window.open(blobUrl, '_blank');
+  
+  if (!w) {
+    // إذا حجب المتصفح النافذة، استخدم طريقة أخرى
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('⚠️ إذا لم تُفتح النافذة، اسمح بالنوافذ المنبثقة', 'warning');
+  }
+  
+  // تنظيف الذاكرة بعد فترة
+  setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
 }
+
 
 // ═══════════════════════════════════════════════════════════
 // 🎨 التنقل بين الصفحات
